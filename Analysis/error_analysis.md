@@ -1,37 +1,55 @@
-# Error Analysis
+# Error Analysis: LR vs SVC Models
 
 The goal of this section is to understand where and why the models fail, and whether these errors follow any patterns.  
-We compare two models:
-1. **LR Baseline – TF-IDF**
-2. **SVC Tuned – TF-IDF**
+We compare two models trained on TF-IDF features:  
 
-For each, we analyze:
-- **False Positives (FP):** Negative reviews predicted as Positive  
-- **False Negatives (FN):** Positive reviews predicted as Negative  
+1. **LR Baseline – TF-IDF**  
+2. **SVC Tuned – TF-IDF**  
 
----
-
-## **1. Summary of Error Counts**
-
-| Model               | False Positives | False Negatives |
-|---------------------|----------------|----------------|
-| LR Baseline TF-IDF  | 1199           | 953            |
-| SVC Tuned TF-IDF    | 1093           | 940            |
-| LR + SVC (Both) (FP)| 921            | ----           |
-| LR + SVC (Both) (FN)| ----           | 733            |
-| Only LR (not SVC)   | 278            | 220            |
-| Only SVC (not LR)   | 172            | 207            |
+We also analyze the impact of **stemming** on model performance.
 
 ---
 
-## **2. Observations**
-- **Large error overlap**: Many reviews (921 FP, 733 FN) are misclassified by *both* models — these are likely inherently ambiguous or lose crucial sentiment clues after preprocessing.
-- **SVC advantage**: SVC has fewer unique errors compared to LR, suggesting the hyperparameter tuning improved generalization.
-- **Preprocessing artifacts**: Stemming sometimes produces unnatural tokens (e.g., *"atroci"* from "atrocious") — while not “spelling mistakes” in the traditional sense, these altered forms may reduce model interpretability.
-- **Negation handling helped**: Negation words were preserved using token joining (e.g., `never_good`), but cases with long gaps or multiple clauses still confuse both models.
-- **Mixed sentiment still tricky**: Reviews that start positive and end negative (or vice versa) are often misclassified due to TF-IDF’s lack of word order awareness.
+## 1. Summary of Error Counts
+
+Below is a comparison of false positives (FP) and false negatives (FN) for both models, **with and without stemming**.
+
+### With Stemming
+
+| Model                | False Positives | False Negatives | Accuracy | F1 Score |
+|----------------------|----------------|----------------|----------|----------|
+| LR Baseline TF-IDF   | 1199           | 953            | 0.8924   | 0.89238  |
+| SVC Tuned TF-IDF     | 1093           | 940            | 0.89835  | 0.89834  |
+| LR + SVC (Both) (FP) | 921            | ----           | ----     | ----     |
+| LR + SVC (Both) (FN) | ----           | 733            | ----     | ----     |
+| Only LR (not SVC)    | 278            | 220            | ----     | ----     |
+| Only SVC (not LR)    | 172            | 207            | ----     | ----     |
+
+### Without Stemming
+
+| Model                | False Positives | False Negatives | Accuracy | F1 Score |
+|----------------------|----------------|----------------|----------|----------|
+| LR Baseline TF-IDF   | 1194           | 933            | 0.89365  | 0.89363  |
+| SVC Tuned TF-IDF     | 1084           | 915            | 0.90005  | 0.90004  |
+| LR + SVC (Both) (FP) | 908            | ----           | ----     | ----     |
+| LR + SVC (Both) (FN) | ----           | 720            | ----     | ----     |
+| Only LR (not SVC)    | 286            | 213            | ----     | ----     |
+| Only SVC (not LR)    | 176            | 195            | ----     | ----     |
+
+####**Notes**
+- **SVC consistently better:** SVC has fewer FPs and FNs than LR, indicating it captures sentiment more accurately.  
+- **Effect of stemming:** Removing stemming slightly improves accuracy and F1, suggesting over-normalization may remove meaningful distinctions.  
+- **Shared vs unique errors:** Most errors are shared between models (inherently difficult reviews: mixed sentiment, negations, sarcasm, rare words), while unique errors point to model-specific weaknesses.  
 
 ---
+
+## 2. Observations
+
+- **SVC advantage:** Hyperparameter tuning improved SVC generalization, making it more robust than LR.  
+- **Preprocessing artifacts:** Stemming can produce unnatural tokens (e.g., *"atroci"* from "atrocious"), slightly affecting interpretability.  
+- **Complex reviews remain challenging:** Long sentences, contrast words, sarcasm, or mixed sentiment often lead to misclassification.  
+- **Negation handling helps but has limits:** Joining negation with the next word (e.g., `never_good`) improves detection, but multiple clauses or long gaps still confuse models.
+
 
 ## **3. Examples**
 
@@ -41,7 +59,6 @@ For each, we analyze:
 > "While an enjoyable movie to poke plot holes... ranks among the worst I've ever seen."  
 - **True Label:** Negative  
 - **Predicted:** Positive
-- **LR Predicted:** Negative (Correct)
 - **Reason:** The contrast cue “while” is removed as a stopword, so early positive tokens (“enjoyable”) outweigh late negatives (“worst”, “mishmash”), tipping SVC to positive. 
 - **Category:** Mixed Sentiment/Discourse cue removed
 
