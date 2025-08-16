@@ -1,4 +1,5 @@
-
+import pandas as pd
+import copy
 def load_imdb_data(nrows=None):
     """
     Args:
@@ -25,4 +26,5 @@ if __name__ == "__main__":
     data, data_OG = load_imdb_data(nrows=2000)  # only first 2000 rows for testing
     print("Data shape:", data.shape)
     print("First 5 rows:\n", data.head())
+
 
