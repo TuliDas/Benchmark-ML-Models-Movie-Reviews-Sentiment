@@ -2,7 +2,7 @@ import pandas as pd
 import copy
 
 def load_imdb_data(nrows=None):
-  """
+    """
     Args:
         csv_path (str): Path to the CSV file. If None, default path is used.
         nrows (int): Number of rows to load (for testing/debugging). If None, load all.
@@ -11,6 +11,7 @@ def load_imdb_data(nrows=None):
         data (pd.DataFrame): Loaded dataset (possibly truncated)
         data_OG (pd.DataFrame): Deepcopy of original dataset
     """
+    
     csv_path = "https://raw.githubusercontent.com/TuliDas/IMDB-Movie-Reviews-Sentiment-Analysis/main/data/IMDB%20Dataset.csv"
     
     # Read CSV
