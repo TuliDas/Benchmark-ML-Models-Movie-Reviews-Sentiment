@@ -41,12 +41,10 @@ def get_spacy_model():
     return _nlp
 
 #Define a faster lemmatization function using nlp.pipe
-def lemmatize_texts(texts):
+def lemmatize_text(text):
     nlp = get_spacy_model()
-    lemmatized_texts = []
-    for doc in nlp.pipe(texts, batch_size=500, n_process=2):
-        lemmatized_texts.append(" ".join([token.lemma_ for token in doc]))
-    return lemmatized_texts
+    doc = nlp(text)
+    return " ".join([token.lemma_ for token in doc])
 
 
 def remove_stopwords(text):
@@ -72,7 +70,7 @@ def preprocess_pipeline(text,use_stemming=False):
     text = noiseremoval_text(text)
     text = lowercase_and_clean(text)
     text = handle_negations(text)
-    text = remove_white_space(text)
+    #text = remove_white_space(text)
     text = lemmatize_texts(text)
     text = remove_stopwords(text)
     text = remove_short_tokens(text)
@@ -80,3 +78,4 @@ def preprocess_pipeline(text,use_stemming=False):
         text= stem_text(text)
     
     return text 
+
