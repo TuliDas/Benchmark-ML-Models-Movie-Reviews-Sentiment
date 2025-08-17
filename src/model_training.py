@@ -4,7 +4,7 @@ from sklearn.svm import SVC
 
 
 def train_logistic_regression(bow_reviews_train, tfidf_reviews_train ,sentiment_train, bow_reviews_test, 
-                                                                            tfidf_reviews_test, sentiment_test):
+                                                                            tfidf_reviews_test):
     lr = LogisticRegression(penalty='l2', max_iter=500, C=1, random_state=42)
     
     #Fitting the model for Bag of Words
@@ -30,3 +30,4 @@ def train_sgd():
 
 def train_svc():
     return
+
