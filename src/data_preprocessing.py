@@ -72,7 +72,7 @@ def preprocess_pipeline(text,use_stemming=False):
     text = noiseremoval_text(text)
     text = lowercase_and_clean(text)
     text = handle_negations(text)
-    #text = remove_white_space(text)
+    text = remove_white_space(text)
     text = lemmatize_texts(text)
     text = remove_stopwords(text)
     text = remove_short_tokens(text)
@@ -80,4 +80,3 @@ def preprocess_pipeline(text,use_stemming=False):
         text= stem_text(text)
     
     return text 
-
