@@ -8,11 +8,10 @@ import spacy
 
 _nlp = None
 
-#1. removing the HTML & Bracketed text
 def noiseremoval_text(text):
   soup = BeautifulSoup(text, "html.parser")
   text = soup.get_text()
-  text = re.sub('\[[^]]*\]', '',text)
+  text = re.sub(r'\[[^]]*\]', '', text)
   return text
 
 def lowercase_and_clean(text):
@@ -78,6 +77,7 @@ def preprocess_pipeline(text,use_stemming=False):
         text= stem_text(text)
     
     return text 
+
 
 
 
