@@ -32,3 +32,9 @@ def visualize_confusion_matrix(results,featured_data, mode="baseline"):
           matrix_title = f"{model_name}-{mode} ( {feat_type} ) Confusion Matrix"
 
           plot_confusion_matrix(cm, matrix_title)
+
+def visualize_model_comparison(df_results):
+  plt.figure(figsize=(12,6))
+  sns.barplot(data=df_results, x="Model", y="Accuracy", hue="Version")
+  plt.title("Model Accuracy Comparison: Baseline vs Tuned")
+  plt.show()
