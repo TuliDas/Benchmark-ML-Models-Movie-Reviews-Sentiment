@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def initialize_error_analysis_dict(best_two_models):
 
@@ -153,3 +154,4 @@ def generate_error_analysis_separate_dataFrames(error_analysis_dict, baseline_na
     } 
 
     return separate_fp_fn_df     # return dict containing the 6 DataFrames
+
