@@ -1,10 +1,9 @@
 # Error Analysis: LR vs SVC Models
-
 The goal of this section is to understand where and why the models fail, and whether these errors follow any patterns.  
-We compare two models trained on TF-IDF features:  
+We compare two models trained on BoW and TF-IDF features:  
 
-1. **LR Baseline – TF-IDF**  
-2. **SVC Tuned – TF-IDF**  
+1. **LogisticRegrssion Baseline – BoW**  
+2. **LinearSVC Tuned – TF-IDF**  
 
 We also analyze the impact of **stemming** on model performance.
 
@@ -18,7 +17,7 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
 |----------------------|----------------|----------------|----------|----------|
-| LR Baseline TF-IDF   | 1199           | 953            | 0.8924   | 0.89238  |
+| LR Baseline BoW      | 1199           | 953            | 0.8924   | 0.89238  |
 | SVC Tuned TF-IDF     | 1093           | 940            | 0.89835  | 0.89834  |
 | LR + SVC (Both) (FP) | 921            | ----           | ----     | ----     |
 | LR + SVC (Both) (FN) | ----           | 733            | ----     | ----     |
@@ -28,13 +27,14 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 ### Without Stemming
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
-|----------------------|----------------|----------------|----------|----------|
-| LR Baseline TF-IDF   | 1194           | 933            | 0.89365  | 0.89363  |
-| SVC Tuned TF-IDF     | 1084           | 915            | 0.90005  | 0.90004  |
-| LR + SVC (Both) (FP) | 908            | ----           | ----     | ----     |
-| LR + SVC (Both) (FN) | ----           | 720            | ----     | ----     |
-| Only LR (not SVC)    | 286            | 213            | ----     | ----     |
-| Only SVC (not LR)    | 176            | 195            | ----     | ----     |
+|----------------------|----------------|----------------|----------|-----------------|
+| LR Baseline BoW      | 1128           | 993            | 0.89145  | 0.891445199435332  |
+| SVC Tuned TF-IDF     | 1085           | 915            | 0.9      | 0.8999927744779561  |
+| LR + SVC (Both) (FP) | 990            | ----           | ----     | ----     |
+| LR + SVC (Both) (FN) | ----           | 831            | ----     | ----     |
+| Only LR (not SVC)    | 162            | 188            | ----     | ----     |
+| Only SVC (not LR)    | 95             | 84             | ----     | ----     |
+
 
 #### **Notes**
 - **SVC consistently better:** SVC has fewer FPs and FNs than LR, indicating it captures sentiment more accurately.  
