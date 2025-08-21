@@ -8,7 +8,7 @@ def get_best_baseline_and_tuned(df_results, results, metric="F1-Score"):
         df_results (pd.DataFrame): DataFrame containing model comparison metrics,
                                    with columns including "Model", "Feature", "Version", and metric columns.
         results (dict): Nested dictionary storing model objects and predictions.
-        metric (str, optional): The evaluation metric to rank models by 
+        metric (str, optional): The evaluation metric to rank models by
                                 (e.g., "F1-Score", "Accuracy"). Default = "F1-Score".
 
     Returns:
@@ -20,19 +20,6 @@ def get_best_baseline_and_tuned(df_results, results, metric="F1-Score"):
               - metric (float): Value of the selected evaluation metric
     """
     best_two_models = {}
-
-    # Best baseline
-    baseline_df = df_results[df_results["Version"].str.lower() == "baseline"]
-    best_baseline = baseline_df.sort_values(by=metric, ascending=False).iloc[0]
-
-    full_name = f"{best_baseline['Model']}-Baseline-({best_baseline['Feature']})"
-    best_two_models["baseline"] = {
-        "full-name" : full_name,
-        "name": best_baseline['Model'],
-        "feature": best_baseline['Feature'],
-        "predictions": results[best_baseline['Model']]["baseline"][best_baseline['Feature']]["predictions"],
-        "f1-score": best_baseline[metric] ,
-    }
 
     # Best tuned
     tuned_df = df_results[df_results["Version"].str.lower() == "tuned"]
@@ -46,5 +33,21 @@ def get_best_baseline_and_tuned(df_results, results, metric="F1-Score"):
         "predictions": results[best_tuned['Model']]["tuned"][best_tuned['Feature']]["predictions"],
         "f1-score" : best_tuned[metric]
     }
+
+
+    # Best baseline + BoW 
+    baseline_df = df_results[(df_results["Version"].str.lower() == "baseline") & (df_results["Feature"] == "BoW")]
+    best_baseline = baseline_df.sort_values(by=metric, ascending=False).iloc[0]
+
+    full_name = f"{best_baseline['Model']}-Baseline-({best_baseline['Feature']})"
+    best_two_models["baseline"] = {
+        "full-name" : full_name,
+        "name": best_baseline['Model'],
+        "feature": best_baseline['Feature'],
+        "predictions": results[best_baseline['Model']]["baseline"][best_baseline['Feature']]["predictions"],
+        "f1-score": best_baseline[metric] ,
+    }
+
+
 
     return best_two_models
