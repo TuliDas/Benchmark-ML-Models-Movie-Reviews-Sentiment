@@ -17,23 +17,21 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
 |----------------------|----------------|----------------|----------|----------|
-| LR Baseline BoW      | 1161           | 1073            | 0.88830   | 0.888298  |
-| SVC Tuned TF-IDF     | 1094           | 940            | 0.89830  | 0.898294  |
-| LR + SVC (Both) (FP) | 921            | ----           | ----     | ----     |
-| LR + SVC (Both) (FN) | ----           | 733            | ----     | ----     |
+| LR Baseline BoW      | 1161           | 1073           | 0.88830  | 0.888298 |
+| SVC Tuned TF-IDF     | 1094           | 940            | 0.89830  | 0.898294 |
+| LR + SVC (Both)      | 921            | 733            | ----     | ----     |
 | Only LR (not SVC)    | 278            | 220            | ----     | ----     |
 | Only SVC (not LR)    | 172            | 207            | ----     | ----     |
 
 ### Without Stemming
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
-|----------------------|----------------|----------------|----------|-----------------|
+|----------------------|----------------|----------------|----------|--------------------|
 | LR Baseline BoW      | 1128           | 993            | 0.89145  | 0.891445199435332  |
-| SVC Tuned TF-IDF     | 1085           | 915            | 0.9      | 0.8999927744779561  |
-| LR + SVC (Both) (FP) | 990            | ----           | ----     | ----     |
-| LR + SVC (Both) (FN) | ----           | 831            | ----     | ----     |
-| Only LR (not SVC)    | 162            | 188            | ----     | ----     |
-| Only SVC (not LR)    | 95             | 84             | ----     | ----     |
+| SVC Tuned TF-IDF     | 1085           | 915            | 0.9      | 0.8999927744779561 |
+| LR + SVC (Both)      | 990            | 831            | ----     | ----               |
+| Only LR (not SVC)    | 162            | 188            | ----     | ----               |
+| Only SVC (not LR)    | 95             | 84             | ----     | ----               |
 
 
 #### **Notes**
