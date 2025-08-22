@@ -17,8 +17,8 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
 |----------------------|----------------|----------------|----------|----------|
-| LR Baseline BoW      | 1199           | 953            | 0.8924   | 0.89238  |
-| SVC Tuned TF-IDF     | 1093           | 940            | 0.89835  | 0.89834  |
+| LR Baseline BoW      | 1161           | 1073            | 0.88830   | 0.888298  |
+| SVC Tuned TF-IDF     | 1094           | 940            | 0.89830  | 0.898294  |
 | LR + SVC (Both) (FP) | 921            | ----           | ----     | ----     |
 | LR + SVC (Both) (FN) | ----           | 733            | ----     | ----     |
 | Only LR (not SVC)    | 278            | 220            | ----     | ----     |
