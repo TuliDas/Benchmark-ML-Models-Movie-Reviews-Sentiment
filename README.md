@@ -57,12 +57,12 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
    - Identify the **best (BoW) baseline** and **best (tf-idf)tuned model** based on **F1-Score**.
 
 5. **Error Analysis**  
-   - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.  
-   - [Compare misclassifications between baseline-BoW and tuned-Tf-Idf models.](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/blob/main/results/error_analysis.md)  
-   - Generate detailed `.txt` files for FP & FN instances:
+   - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.
+   - [Generate detailed `.txt` files for FP & FN instances:](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/tree/main/results/Text%20files%20of%20all%20False-positives%20and%20false-negative)
      - Detected by both models
      - Detected by baseline only
      - Detected by tuned only  
+   - [Compare misclassifications between baseline-BoW and tuned-Tf-Idf models.](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/blob/main/results/error_analysis.md)  
 
 6. **Visualization**  
    - Confusion matrices  
