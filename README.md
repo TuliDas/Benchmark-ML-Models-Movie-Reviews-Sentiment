@@ -1,4 +1,4 @@
-# IMDB Movie Reviews Sentiment Analysis 🎬
+# Benchmarking Supervised ML Models for Sentiment Classification (NLP) on IMDB Movie Reviews 🎬
 
 This project focuses on building and evaluating machine learning models for sentiment classification of IMDB movie reviews (positive vs. negative). The workflow follows a structured and modular pipeline for preprocessing, feature extraction, model training, evaluation, selection, and error analysis.
 
@@ -7,28 +7,32 @@ This project focuses on building and evaluating machine learning models for sent
 ## 📂 Dataset
 
 - **Source:** [Kaggle – IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)  
-- **Subset Used:** First 2000 reviews for faster experimentation.  
 - **Columns:** `review`, `sentiment`  
 
 ---
 
 ## 🧰 Project Structure
-
-IMDB-Movie-Reviews-Sentiment-Analysis/
+```
+Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/
 │
 ├── data/ # Raw and processed CSV datasets
 ├── src/ # All modular functions
+| ├── __init__.py
+| ├── data_loading.py
 │ ├── data_preprocessing.py
+│ ├── error_analysis.py
 │ ├── feature_extraction.py
-│ ├── model_training.py
-│ ├── model_selection.py
-│ └── error_analysis.py
-├── notebooks/ # Jupyter/Colab notebooks
+| ├── hyperparameter_tuning.py
+| ├── model_evaluation.py
+| ├── model_performance_comparison.py
+| ├── model_training.py
+| ├── reporting.py
+│ ├── select_best_models.py
+│ └── utils.py
+├── notebooks/ #Colab notebooks - IMDB_Movie_Reviews_Sentiment_Analysis.ipynb
 ├── README.md
 └── requirements.txt
-
-
-
+```
 ---
 
 ## 🔹 Workflow
