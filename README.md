@@ -47,7 +47,7 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
    - Bag-of-Words (BoW)  
    - Term Frequency-Inverse Document Frequency (TF-IDF)
 
-3. **Model Training, Hypertuning & Evaluation**  
+3. **Model Training, Hyperparameter Tuning & Evaluation**  
    - Models: Logistic Regression, MultinomialNB, SGDClassifier, LinearSVC  
    - Configurations: Baseline & Tuned  
    - Metrics: Accuracy, Precision, Recall, F1-Score  
