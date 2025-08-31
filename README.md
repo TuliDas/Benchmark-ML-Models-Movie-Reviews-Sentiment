@@ -58,7 +58,7 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
 
 5. **Error Analysis**  
    - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.  
-   - Compare misclassifications between baseline and tuned models.  
+   - [Compare misclassifications between baseline-BoW and tuned-Tf-Idf models.](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/blob/main/results/error_analysis.md)  
    - Generate detailed `.txt` files for FP & FN instances:
      - Detected by both models
      - Detected by baseline only
