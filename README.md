@@ -57,7 +57,10 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
    - Barplots for model performance comparisons
 
 5. **Best Model Selection**  
-   - Identify the **best (BoW) baseline** and **best (tf-idf)tuned model** based on **F1-Score**.
+   - Identify the **best (BoW) baseline** and **best (TF-IDF) tuned model** based on **F1-Score**.  
+   - 💡 From the latest run of the notebook, the selected models were:  
+     - **Logistic Regression** for baseline with **BoW** features  
+     - **Linear SVC** for tuned model with **TF-IDF** features
      
 6. **Error Analysis**  
    - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.
