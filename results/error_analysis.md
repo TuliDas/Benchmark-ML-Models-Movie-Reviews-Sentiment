@@ -118,50 +118,65 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Category:** Contrast / Contextual misunderstanding / Negation dilution  
 
 
-#### **Example-09 (*Index: 30730*) (FN, Only LR)**   [UPDATE]
-> "A decent little flick about a guy haunted by his past, with some quirky characters and a mix of madness .....A decent effort and worth seeing IF you like serial killer flicks."  
-- **True Label:** Positive  
-- **Predicted (LR):** Negative  
-- **Reason:** Early negative terms (*"haunted"*, *"abusive"*, *"bonkers"*) describe the movie plot, not the reviewer’s sentiment. LR overemphasized these, underweighting later positive statements (*"decent effort"*, *"worth seeing"*).  
-- **Why SVC got it right:** SVC balanced early negative and later positive terms better, giving higher weight to the evaluative parts that reflect the reviewer’s true opinion.  
-- **Category:** Narrative-structure misinterpretation / Positive review with early negative plot description
+#### **Example-09 (*Index: 9153*) (FN, Only LR-BoW)**
 
-#### **Example-10 (Index: 6778) (FN, Only LR)**   [UPDATE]
-> Good movie…VERY good movie. … It really is the story that keeps you focused. .... more morbid horror fans and an interesting storyline."
-- **True Label:** Positive  
-- **Predicted (LR):** Negative
-- **Reason:** The model likely misinterpreted mentions of "blood and gore," "vampires," and the director's usual reputation as negative, failing to account for the strong praise for story, acting, and overall enjoyment.
-- **Category:** Contextual Misunderstanding / Focus on Surface Negatives
+> "Of the films of the young republic few in number as they are The Buccaneer (1958) stands out as a finely crafted film... There are colorful side stories in this film of the young volunteer at his first dance to celebrate the victory."  
 
-#### **Example-11 (*Index: 9899*) (FP, SVC Only)**   [UPDATE]
-> "While an enjoyable movie to poke plot holes... ranks among the worst I've ever seen."  
-- **True Label:** Negative  
-- **Predicted:** Positive  
-- **Reason:** The contrast cue “while” was removed during stopword filtering, so early positive tokens (“enjoyable”) outweighed strong late negatives (“worst”, “mishmash”), tipping SVC toward a positive prediction. The long, clause-heavy structure made it harder for SVC’s TF-IDF features to capture the shift in sentiment.  
-- **Why LR got it right:** Logistic Regression may have distributed weights more evenly, allowing multiple negative terms later in the review to collectively outweigh the single early positive cue. LR likely gave higher importance to terms like *"atrocious"*, *"worst"*, and *"confusing"*, preserving the overall negative classification despite the initial positivity.  
-- **Category:** Mixed Sentiment / Discourse cue removed
-
-#### **Example-12 (Index: 17210) (FP, Only SVC)**  [UPDATE]
-> "Not only do alien visitors look exactly like furry armpitted human woman and not only are alien visitors able to perfectly speak English... This movie tries to get a moral, ecological point across but only succeeds in making you yawn and pray it ends soon."
-- **True Label:** Negative
-- **Predicted:** Positive
-- **Reason:** The model likely misinterpreted descriptive words like "alien visitors" and "moral, ecological point" as neutral/positive content, while failing to capture the sarcastic and critical tone of the review that expresses boredom and annoyance.
-- **Category:** Sarcasm / Surface Positives Misleading Overall Tone
-
-#### **Example-13 (*Index: 2469*) (FN, Only SVC)**   [UPDATE]
-> "It may be a remake of the 1937 film by Capra, but it is wrong to consider it only in that way! ... I strongly recommend it."  
 - **True Label:** Positive  
 - **Predicted:** Negative  
-- **Reason:** The review contains strong positive phrases (*"excellent"*, *"terrific"*, *"strongly recommend"*) but also includes mild critical or contrastive statements early on. For SVC, TF-IDF likely assigned higher weight to negative terms like *"wrong"* and *"awful"*, overshadowing the overall positive tone. The long, multi-clause sentence structure diluted positive cues, making the model misinterpret the sentiment. 
-- **Why LR got it right:** Logistic Regression may have balanced the influence of both positive and negative tokens more evenly, allowing the strong positive terms to dominate the final classification.  
-- **Category:** Mixed cues with dominant positive sentiment
+- **Reason :** The LR-BoW model misses the overall positive praise and focuses on neutral descriptive words like "battle," "march," "force," and "defend," which may seem negative or neutral in isolation. It fails to capture the celebratory tone and admiration for the film’s craftsmanship.  
+- **Why SVC-TF-IDF got it right:** The SVC model with TF-IDF features accounts for term importance and context, giving more weight to sentiment-laden phrases like "finely crafted film," "celebrate the victory," and "colorful side stories." This allows it to correctly identify the overall positive sentiment despite the presence of neutral or seemingly negative descriptive words.  
+- **Category:** Mixed sentiments / Long descriptive reviews
 
-#### **Example-14 (Index: 11151) (FN, Only SVC)**     [UPDATE]
-> "Wow! the French are really getting the hang of it... Mission Cleopatra is the best Asterix story ever written... not one moment you're bored... It's a must C!"
-- **True Label:** Positive
-- **Predicted:** Negative
-- **Reason:** The review is highly positive, praising the story, acting, and humor. The model likely misclassified it because of mentions of minor criticisms (e.g., special effects, music choices) which created contrast words that the model interpreted as negative.
-- **Category:** Mixed Sentiment / Minor Criticism Misread as Negative
+
+#### **Example-10 (*Index: 22885*) (FN, Only LR-BoW)**
+> "Will all of you please lay the hell off Todd Sheets!?! Let's give you $30,000 to make a movie and see what you come up with! ... But what the hell, I still love this movie."  
+- **True Label:** Positive  
+- **Predicted:** Negative  
+- **Reason :** The LR-BoW model misinterprets negations and informal expressions like "not the worst either" and "hell" as negative, failing to capture the reviewer’s positive sentiment and overall praise for the movie and Todd Sheets’ effort.  
+- **Why SVC-TF-IDF got it right:** The SVC model with TF-IDF accounts for the context and relative importance of words, recognizing key positive indicators such as "love this movie," "good old fashioned Guerilla Film-making," and "consummate professional," correctly identifying the overall positive sentiment despite the presence of negations and slang.  
+- **Category:** Negations / Slang / Mixed sentiments
+
+
+#### **Example-11 (*Index: 31041*) (FP, Only SVC-TF-IDF)**
+> "The show had great episodes, this is not one of them. It's not a terrible episode, it's just hard to follow up 'The man that was death.', 'All through the house', and 'Dig that cat, he's real gone.'"  
+- **True Label:** Negative  
+- **Predicted:** Positive  
+- **Reason :** The SVC-TF-IDF model overemphasized the presence of positive words like "great" and "watch," while underestimating the negations and the subtle critique in "this is not one of them" and "hard to follow up." It thus misclassified the overall mildly negative review as positive.  
+- **Why LR-BoW got it right:** The LR-BoW model, despite its simplicity, gives more weight to negation phrases and the relative absence of overwhelmingly positive sentiment across the review, correctly capturing the reviewer’s disappointment with this particular episode.  
+- **Category:** Negations / Subtle critique / Mixed sentiments
+
+
+#### **Example-12 (*Index: 17410*) (FP, Only SVC-TF-IDF)**
+> "First of all, this plot is way overdone - girl wants to make it, everyone loves her, snobby girl intervenes, all looks lost, girl pulls through, everyone loves her again etc... I really hate how they keep on dissing classical music... the only reason that I can think of for making this movie is to promote Britney Spears... 1/10 stars."  
+
+- **True Label:** Negative  
+- **Predicted:** Positive  
+- **Reason :** The SVC-TF-IDF model focused too much on positive or neutral words such as "good voice," "attractive," or "pulls through," and failed to properly account for strong negations and sarcastic phrases expressing dislike and criticism. It misclassified the overall negative review as positive.  
+- **Why LR-BoW got it right:** The LR-BoW model captures negation and heavily repeated negative terms like "overdone," "hate," "insult," and the low rating "1/10," allowing it to correctly classify the review as negative.  
+- **Category:** Negations / Sarcasm / Mixed sentiments
+
+
+#### **Example-13 (*Index: 10896*) (FN, Only SVC-TF-IDF)**
+
+> "I watch this movie at the start of every summer, and it never ceases to amuse me... Some of the jokes fall flat or will only elicit a slight chuckle, but others will leave you rolling... This is a good movie to watch over the summer... it's just funny as hell."  
+
+- **True Label:** Positive  
+- **Predicted:** Negative  
+- **Reason :** The SVC-TF-IDF model likely underestimated the overall positive sentiment because the review contains minor criticisms like "some jokes fall flat" and "slight chuckle." The model misinterpreted these as strong negative cues and failed to weigh the repeated positive phrases and superlatives like "never ceases to amuse," "leave you rolling," and "funny as hell."  
+- **Why LR-BoW got it right:** The LR-BoW model emphasizes the frequent occurrence of clearly positive words such as "amuse," "funny," "hilarious," "good," and "bang," which outweigh the few minor criticisms. Its bag-of-words approach captures the dominant positive sentiment more reliably in this long, descriptive review.  
+- **Category:** Mixed sentiments / Minor criticism within overall positive review
+
+
+#### **Example-14 (*Index: 37966*) (FN, Only SVC-TF-IDF)**
+
+> "Spoilers... I saw the original on TV sometime ago and remembered this production as less gripping than most Beeb costume drama... That said, I love these classic dramas and virtually all of them are a sight better than much of the 'modern' drama on TV these days. So 7 stars because in spite of the irritations it's still a good watch."  
+
+- **True Label:** Positive  
+- **Predicted:** Negative  
+- **Reason :** The SVC-TF-IDF model overemphasized negative terms and phrases such as "less gripping," "irritated," "sanctimoniousness," "totally dissatisfied," and "ridiculous," causing it to misclassify the review despite the clear overall positive sentiment expressed at the end.  
+- **Why LR-BoW got it right:** The LR-BoW model relies on the frequency of sentiment-bearing words and could pick up repeated positive terms like "good story," "commendations," "perfect," "handsome hero," and "love classic dramas," which outweighed the negative mentions and allowed it to correctly classify the review as positive.  
+- **Category:** Mixed sentiments / Long descriptive reviews
 
 ---
 
