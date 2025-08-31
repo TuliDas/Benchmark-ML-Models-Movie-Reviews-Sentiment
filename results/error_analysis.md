@@ -61,12 +61,12 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Category:** Sarcasm / Mixed Sentiment / Humor
 
 
-#### **Example-02 (Index: 31689) (FP, Both LR and SVC)**  
-> "I didn't hate this movie as much as some on my all-time blacklist ..... Scene one is very good, all the rest are crap."  
+#### **Example-02 (Index: 48505) (FP, Both LR and SVC)**  
+> "I don't give much credence to AIDS conspiracy theories … and there is a sublime silent cameo by iconic performance artist, Ron Athey."  
 - **True Label:** Negative  
 - **Predicted:** Positive  
-- **Reason:** The early use of “good” for the first scene may outweigh later negative descriptors like “waste” and “crap.” The humorous references to actors could further confuse sentiment, causing both models to predict positive.  
-- **Category:** Mixed Sentiment / Slang / Humor
+- **Reason:** Although the review emphasizes the film’s dark, ugly, and poorly done qualities, it also contains partially positive or neutral remarks (*“unique cultural context,” “partly saves,” “interesting performance,” “effective motif,” “sublime cameo”*). These scattered positive descriptors likely outweighed the overall negative tone, confusing the models into predicting positive. The mixed evaluation—criticism of the film with selective praise—makes the sentiment ambiguous.  
+- **Category:** Mixed Sentiment / Contrast / Ambiguity  
 
 #### **Example-03 (Index: 8200)(FP, Both LR and SVC)**  
 > "If it wasn't for the terrific music, I would not hesitate to give this cinematic underachievement. But the music actually makes me like certain passages."  
@@ -95,23 +95,30 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Predicted:** Negative  
 - **Reason:** Despite mostly positive comments about likable characters and enjoyable aspects, the model likely focused on negative words like "problem" and "disappointed," leading to misclassification.  
 - **Category:** Mixed Sentiment / Negation / Contrast
-- 
-#### **Example-07 (*Index: 5464*) (FP, Only LR)**  
-> "Begins better than it ends... The message deciphered was contrary to the whole story. It just does not mesh."  
+
+#### **Example-07 (*Index: 35467*) (FP, Only LR-BoW)** 
+> ""Fly Me To The Moon" has to be the worst animated film I've seen in a LONG TIME. … The story is to be generous...trite. … Bad movie."  
+
 - **True Label:** Negative  
 - **Predicted:** Positive  
-- **Reason:** Early positive phrasing (“begins better”) and light humor (“funny”) may have been overweighted by LR’s TF-IDF coefficients, overshadowing the later clear negative statements (“does not mesh”, “contrary to the whole story”). LR’s linear nature makes it more prone to being swayed by strong early positive terms if the later negatives have slightly weaker learned weights.  
-- **Why SVC got it right:** SVC’s margin-based classification might have better separated the negative terms in vector space, allowing the stronger negative conclusion to dominate despite the initial positive cues.  
-- **Category:** Mixed Sentiment / Positivity bias from early clauses
+- **Reason:** The review is overwhelmingly negative, but LR-BoW likely overweighted isolated positive/neutral tokens such as *“OK 3-D visuals,”* *“mildly stimulating image,”* and *“pretty cool soundtrack.”* Since BoW ignores context and word order, these scattered positive words distorted the overall sentiment. The repeated strong negatives (*“worst,” “atrocious,” “bad movie”*) were diluted by the presence of a few positive terms.  
+- **Why SVC got it right:** SVC with TF-IDF weighting downplays less informative or isolated positive words and focuses more on the strongly negative terms. The margin-based separation allowed SVC to correctly classify the dominant negative sentiment.  
+- **Category:** Mixed Sentiment / Positivity bias from isolated tokens / Context loss in BoW  
 
-#### **Example-08 (Index: 45664) (FP, Only LR)**
-> I do not know who is to blame, Miss Leigh or her director, ...... because the production is lovely to look at."
+
+#### **Example-08 (*Index: 22086*) (FP, Only LR-BoW)**
+> "Free Willzyx … is the worst episode of ANY of the TV shows I watch… South Park was for very long my favorite… Free Willzyk has NONE of the content I mentioned earlier. It was so tame… I was extremely disgusted with this episode and I can't believe the shocking decline…"  
+
 - **True Label:** Negative  
-- **Predicted:** Positive
-- **Reason:** The review contains both strong criticism (Leigh’s performance “almost impossible to watch”) and praise (Chaplin, Smith, Finney, supporting cast, production). The LR model likely focused on positive words like “superior,” “wonderful,” and “pleasure,” leading to misclassification.
-- **Category:** Mixed Sentiment / Contrast
+- **Predicted:** Positive  
+- **Reason:** LR-BoW appears to have been misled by strong positive associations with words like *“favorite,” “content,”* and *references to other popular shows* (Family Guy, Simpsons, etc.), while failing to give proper weight to intensifiers of negativity such as *“worst,” “tame,” “never get back,” “disgusted,”* and *“decline.”* The BoW model’s lack of context and order meant it overemphasized nostalgic or neutral references, diluting the clear negative sentiment.  
 
-#### **Example-09 (*Index: 30730*) (FN, Only LR)**  
+- **Why SVC got it right:** SVC with TF-IDF downweighted frequent neutral tokens (e.g., show titles, “content”) and gave stronger margin separation to the highly polar negative words like *“worst,” “tame,” “disgusted.”* Its margin-based learning allowed the end-of-review negative emphasis to dominate.  
+
+- **Category:** Contrast / Contextual misunderstanding / Negation dilution  
+
+
+#### **Example-09 (*Index: 30730*) (FN, Only LR)**   [UPDATE]
 > "A decent little flick about a guy haunted by his past, with some quirky characters and a mix of madness .....A decent effort and worth seeing IF you like serial killer flicks."  
 - **True Label:** Positive  
 - **Predicted (LR):** Negative  
@@ -119,14 +126,14 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Why SVC got it right:** SVC balanced early negative and later positive terms better, giving higher weight to the evaluative parts that reflect the reviewer’s true opinion.  
 - **Category:** Narrative-structure misinterpretation / Positive review with early negative plot description
 
-#### **Example-10 (Index: 6778) (FN, Only LR)**
+#### **Example-10 (Index: 6778) (FN, Only LR)**   [UPDATE]
 > Good movie…VERY good movie. … It really is the story that keeps you focused. .... more morbid horror fans and an interesting storyline."
 - **True Label:** Positive  
 - **Predicted (LR):** Negative
 - **Reason:** The model likely misinterpreted mentions of "blood and gore," "vampires," and the director's usual reputation as negative, failing to account for the strong praise for story, acting, and overall enjoyment.
 - **Category:** Contextual Misunderstanding / Focus on Surface Negatives
 
-#### **Example-11 (*Index: 9899*) (FP, SVC Only)**  
+#### **Example-11 (*Index: 9899*) (FP, SVC Only)**   [UPDATE]
 > "While an enjoyable movie to poke plot holes... ranks among the worst I've ever seen."  
 - **True Label:** Negative  
 - **Predicted:** Positive  
@@ -134,14 +141,14 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Why LR got it right:** Logistic Regression may have distributed weights more evenly, allowing multiple negative terms later in the review to collectively outweigh the single early positive cue. LR likely gave higher importance to terms like *"atrocious"*, *"worst"*, and *"confusing"*, preserving the overall negative classification despite the initial positivity.  
 - **Category:** Mixed Sentiment / Discourse cue removed
 
-#### **Example-12 (Index: 17210) (FP, Only SVC)**
+#### **Example-12 (Index: 17210) (FP, Only SVC)**  [UPDATE]
 > "Not only do alien visitors look exactly like furry armpitted human woman and not only are alien visitors able to perfectly speak English... This movie tries to get a moral, ecological point across but only succeeds in making you yawn and pray it ends soon."
 - **True Label:** Negative
 - **Predicted:** Positive
 - **Reason:** The model likely misinterpreted descriptive words like "alien visitors" and "moral, ecological point" as neutral/positive content, while failing to capture the sarcastic and critical tone of the review that expresses boredom and annoyance.
 - **Category:** Sarcasm / Surface Positives Misleading Overall Tone
 
-#### **Example-13 (*Index: 2469*) (FN, Only SVC)**  
+#### **Example-13 (*Index: 2469*) (FN, Only SVC)**   [UPDATE]
 > "It may be a remake of the 1937 film by Capra, but it is wrong to consider it only in that way! ... I strongly recommend it."  
 - **True Label:** Positive  
 - **Predicted:** Negative  
@@ -149,7 +156,7 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 - **Why LR got it right:** Logistic Regression may have balanced the influence of both positive and negative tokens more evenly, allowing the strong positive terms to dominate the final classification.  
 - **Category:** Mixed cues with dominant positive sentiment
 
-#### **Example-14 (Index: 11151) (FN, Only SVC)**
+#### **Example-14 (Index: 11151) (FN, Only SVC)**     [UPDATE]
 > "Wow! the French are really getting the hang of it... Mission Cleopatra is the best Asterix story ever written... not one moment you're bored... It's a must C!"
 - **True Label:** Positive
 - **Predicted:** Negative
