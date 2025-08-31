@@ -8,7 +8,6 @@ This project focuses on building and evaluating machine learning models for sent
 
 - **Source:** [Kaggle – IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)  
 - **Columns:** `review`, `sentiment`  
-
 ---
 
 ## 🧰 Project Structure
@@ -48,15 +47,19 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
    - Bag-of-Words (BoW)  
    - Term Frequency-Inverse Document Frequency (TF-IDF)
 
-3. **Model Training & Evaluation**  
+3. **Model Training, Hypertuning & Evaluation**  
    - Models: Logistic Regression, MultinomialNB, SGDClassifier, LinearSVC  
    - Configurations: Baseline & Tuned  
    - Metrics: Accuracy, Precision, Recall, F1-Score  
 
-4. **Best Model Selection**  
-   - Identify the **best (BoW) baseline** and **best (tf-idf)tuned model** based on **F1-Score**.
+4. **Visualization**  
+   - Confusion matrices  
+   - Barplots for model performance comparisons
 
-5. **Error Analysis**  
+5. **Best Model Selection**  
+   - Identify the **best (BoW) baseline** and **best (tf-idf)tuned model** based on **F1-Score**.
+     
+6. **Error Analysis**  
    - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.
    - [Generate detailed `.txt` files for FP & FN instances:](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/tree/main/results/Text%20files%20of%20all%20False-positives%20and%20false-negative)
      - Detected by both models
@@ -64,9 +67,6 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
      - Detected by tuned only  
    - [Compare misclassifications between baseline-BoW and tuned-Tf-Idf models.](https://github.com/TuliDas/Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/blob/main/results/error_analysis.md)  
 
-6. **Visualization**  
-   - Confusion matrices  
-   - Barplots for model performance comparisons  
 ---
 
 ## How to Run
