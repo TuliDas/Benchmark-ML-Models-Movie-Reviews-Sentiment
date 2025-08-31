@@ -32,8 +32,7 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
 | ├── reporting.py
 │ ├── select_best_models.py
 │ └── utils.py
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 ---
 
