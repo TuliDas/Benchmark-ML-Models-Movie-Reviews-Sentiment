@@ -16,6 +16,10 @@ This project focuses on building and evaluating machine learning models for sent
 Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/
 │
 ├── data/ # Raw and processed CSV datasets
+├── notebooks/ #(Colab)-IMDB_Movie_Reviews_Sentiment_Analysis.ipynb
+├── results/
+| ├── Text files of all False-positives and false-negative/ #(.txt files of all False-Positives and False-Negatives)
+| └── error_analysis.md 
 ├── src/ # All modular functions
 | ├── __init__.py
 | ├── data_loading.py
@@ -29,7 +33,6 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
 | ├── reporting.py
 │ ├── select_best_models.py
 │ └── utils.py
-├── notebooks/ #Colab notebooks - IMDB_Movie_Reviews_Sentiment_Analysis.ipynb
 ├── README.md
 └── requirements.txt
 ```
@@ -51,7 +54,7 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
    - Metrics: Accuracy, Precision, Recall, F1-Score  
 
 4. **Best Model Selection**  
-   - Identify the **best baseline** and **best tuned model** based on **F1-Score**.
+   - Identify the **best (BoW) baseline** and **best (tf-idf)tuned model** based on **F1-Score**.
 
 5. **Error Analysis**  
    - Compute **False Positives (FP)** and **False Negatives (FN)** for both models.  
@@ -64,7 +67,13 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
 6. **Visualization**  
    - Confusion matrices  
    - Barplots for model performance comparisons  
-
 ---
 
+## How to Run
 
+### Using Google Colab
+1. Open the notebook: [`IMDB_Movie_Reviews_Sentiment_Analysis.ipynb`](notebooks/IMDB_Movie_Reviews_Sentiment_Analysis.ipynb)  
+2. Run all cells **sequentially**.  
+3. The first cell contains a `git clone` command that will automatically download all the `src/` modules into the Colab environment.  
+4. Outputs, including model performance metrics, error analysis files, and visualizations, will be generated in Colab.  
+---
