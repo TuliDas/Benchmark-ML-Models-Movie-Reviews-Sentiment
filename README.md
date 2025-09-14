@@ -59,7 +59,7 @@ See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full directory layout.
 
 ### Using Google Colab
 1. Open the notebook: [`main.ipynb`](notebooks/main.ipynb)  
-2. [Download the dataset]() , upload it to the colab   
+2. [Download the dataset](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews) , upload it to the colab   
 3. The first cell contains a `git clone` command that will automatically download all the `src/` modules into the Colab environment. 
 4. Run all cells **sequentially**.
 5. Outputs, including model performance metrics, error analysis files, and visualizations, will be generated in Colab.  
