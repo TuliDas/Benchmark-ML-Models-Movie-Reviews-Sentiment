@@ -4,17 +4,16 @@ This project focuses on building and evaluating machine learning models for sent
 
 ---
 
-## 📂 Dataset
-
+## Dataset
 - **Source:** [Kaggle – IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)  
 - **Columns:** `review`, `sentiment`  
 ---
 
-## 🧰 Project Structure
+## Project Structure
 See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full directory layout.
 ---
 
-## 🔹 Workflow
+## Workflow
 
 1. **Data Loading & Preprocessing**  
    - Text cleaning, tokenization, stopword removal, stemming, and label binarization.  
@@ -35,7 +34,7 @@ See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full directory layout.
 
 5. [**Best Model Selection**](https://github.com/TuliDas/Benchmark-ML-Models-Movie-Reviews-Sentiment/blob/main/results/best-two-models.png)  
    - Identify the **best (BoW) baseline** and **best (TF-IDF) tuned model** based on **F1-Score**.  
-   - 💡 From the latest run of the notebook, the selected models were:  
+   - From the latest run of the notebook, the selected models were:  
      - **Logistic Regression** for baseline with **BoW** features  
      - **Linear SVC** for tuned model with **TF-IDF** features
      
