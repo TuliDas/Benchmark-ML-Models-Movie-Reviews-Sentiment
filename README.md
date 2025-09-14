@@ -11,29 +11,7 @@ This project focuses on building and evaluating machine learning models for sent
 ---
 
 ## 🧰 Project Structure
-```
-Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Reviews/
-│
-├── data/ # Raw and processed CSV datasets
-├── notebooks/ #(Colab)-IMDB_Movie_Reviews_Sentiment_Analysis.ipynb
-├── results/
-| ├── Text files of all False-positives and false-negative/ #(.txt files of all False-Positives and False-Negatives)
-| └── error_analysis.md 
-├── src/ # All modular functions
-| ├── __init__.py
-| ├── data_loading.py
-│ ├── data_preprocessing.py
-│ ├── error_analysis.py
-│ ├── feature_extraction.py
-| ├── hyperparameter_tuning.py
-| ├── model_evaluation.py
-| ├── model_performance_comparison.py
-| ├── model_training.py
-| ├── reporting.py
-│ ├── select_best_models.py
-│ └── utils.py
-└── README.md
-```
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full directory layout.
 ---
 
 ## 🔹 Workflow
@@ -74,8 +52,9 @@ Benchmarking-Supervised-ML-Models-for-Sentiment-Classification-NLP-on-IMDB-Revie
 ## How to Run
 
 ### Using Google Colab
-1. Open the notebook: [`IMDB_Movie_Reviews_Sentiment_Analysis.ipynb`](notebooks/IMDB_Movie_Reviews_Sentiment_Analysis.ipynb)  
-2. Run all cells **sequentially**.  
-3. The first cell contains a `git clone` command that will automatically download all the `src/` modules into the Colab environment.  
-4. Outputs, including model performance metrics, error analysis files, and visualizations, will be generated in Colab.  
+1. Open the notebook: [`main.ipynb`](notebooks/main.ipynb)  
+2. [Download the dataset]() , upload it to the colab   
+3. The first cell contains a `git clone` command that will automatically download all the `src/` modules into the Colab environment. 
+4. Run all cells **sequentially**.
+5. Outputs, including model performance metrics, error analysis files, and visualizations, will be generated in Colab.  
 ---

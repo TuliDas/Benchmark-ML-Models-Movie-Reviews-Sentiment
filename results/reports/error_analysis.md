@@ -27,7 +27,7 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 
 | Model                | False Positives | False Negatives | Accuracy | F1 Score |
 |----------------------|----------------|----------------|----------|--------------------|
-| LR Baseline BoW      | 1128           | 993            | 0.89145  | 0.891445199435332  |
+| LR Baseline BoW      | 1152           | 1019           | 0.89145  | 0.891445199435332  |
 | SVC Tuned TF-IDF     | 1085           | 915            | 0.9      | 0.8999927744779561 |
 | LR + SVC (Both)      | 990            | 831            | ----     | ----               |
 | Only LR (not SVC)    | 162            | 188            | ----     | ----               |
@@ -183,8 +183,4 @@ Below is a comparison of false positives (FP) and false negatives (FN) for both 
 ## **4. Implications**
 - **Mixed sentiment & contextual misunderstanding:** Many errors occur because the models cannot accurately capture shifts in sentiment or nuanced context within long reviews. Words expressing both positive and negative opinions in the same review often mislead the classifiers.
 - **Sarcasm & subtle irony:** Reviews containing sarcasm or ironic phrasing are particularly challenging, as traditional bag-of-words or TF-IDF features fail to detect the intended sentiment.
-- **Possible improvements**:
-  - Preserve conjunctions like “while”, “but” to signal sentiment shifts.
-  - Try n-grams (bi/tri) to capture short phrases instead of isolated words.
-  - Explore transformer-based embeddings (BERT, DistilBERT) for context capture.
 ---
